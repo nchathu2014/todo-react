@@ -46,13 +46,13 @@ export default class ToDoList extends React.Component{
 
 		return(
 			<div className="container">
-				<h2 className='text-center' style={style}>To-Do-List : ReactJS</h2>
+				<h2 className='text-center' style={style}>To-Do-List : ReactJS (ES7)</h2>
 				<div className="row">
 					<div className="col-lg-6 col-lg-offset-3">
 						<InputComponent itemInput={this.state.data} 
 						                itemAddFunc={this._itemAddFunc.bind(this)}
 						                itemOnChange={this._itemOnChange.bind(this)}
-						                ref={'inputRef'}/>
+						                ref={'inputRef'}/>					
 					</div>
 					<div className="row">
 						<ItemList listData={this.state.listData}/>
@@ -63,9 +63,15 @@ export default class ToDoList extends React.Component{
 	}
 }
 
-
 ToDoList.propTypes={
+	itemInput:React.PropTypes.string,
+	itemAddFunc:React.PropTypes.func,
+	itemOnChange:React.PropTypes.func,
+	listData:React.PropTypes.func
+}
 
+ToDoList.defaultProps={
+	itemInput:""
 }
 
 
