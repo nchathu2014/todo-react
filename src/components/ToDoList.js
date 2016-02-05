@@ -9,18 +9,27 @@ export default class ToDoList extends React.Component{
 		super();
 		this.state={
 			data:"",
-			listData:["Item 1"]
+			listData:[]
 		}
 	}
 
 	_itemAddFunc(event){
 		console.log("_itemAddFunc Fires "+this.state.data);
-		this.setState({
-			listData:this.state.listData.concat(this.state.data)
-		});
-		var node = ReactDOM.findDOMNode(document.getElementById('inputBox'));
-		console.log(node);
-					
+
+		if(this.state.data.trim()==""){
+			alert("Enter a topic");
+		}else{
+			var node = ReactDOM.findDOMNode(this.refs.inputRef.refs.inputBox);		
+			this.setState({
+				listData:this.state.listData.concat(this.state.data)
+			});
+			if(node.value){
+				this.setState({
+					data:""
+				})
+				node.focus();
+			}
+		}	
 	}
 
 	_itemOnChange(event){
@@ -42,7 +51,8 @@ export default class ToDoList extends React.Component{
 					<div className="col-lg-6 col-lg-offset-3">
 						<InputComponent itemInput={this.state.data} 
 						                itemAddFunc={this._itemAddFunc.bind(this)}
-						                itemOnChange={this._itemOnChange.bind(this)}/>
+						                itemOnChange={this._itemOnChange.bind(this)}
+						                ref={'inputRef'}/>
 					</div>
 					<div className="row">
 						<ItemList listData={this.state.listData}/>
@@ -53,5 +63,9 @@ export default class ToDoList extends React.Component{
 	}
 }
 
+
+ToDoList.propTypes={
+
+}
 
 
