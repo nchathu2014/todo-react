@@ -1,0 +1,14 @@
+body{
+	background: #1b6d85;
+}
+
+.cus-input{
+	padding:30px;
+	font-size: 20px;
+}
+
+.list-item{
+	font-size: 16px;
+	border-bottom:1px dotted white;
+	padding: 10px;
+}
