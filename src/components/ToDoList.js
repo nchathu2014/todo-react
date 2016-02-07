@@ -14,7 +14,7 @@ export default class ToDoList extends React.Component{
 	}
 
 	_itemAddFunc(event){
-		console.log("_itemAddFunc Fires "+this.state.data);
+		
 
 		if(this.state.data.trim()==""){
 			alert("Enter a topic");
@@ -38,6 +38,14 @@ export default class ToDoList extends React.Component{
 		});	
 	}
 
+	_enterKeyPressed(event){
+		
+		if(event.charCode==13){
+			
+			this._itemAddFunc()
+		}
+	}
+
 	render(){
 
 		var style={
@@ -51,6 +59,7 @@ export default class ToDoList extends React.Component{
 					<div className="col-lg-6 col-lg-offset-3">
 						<InputComponent itemInput={this.state.data} 
 						                itemAddFunc={this._itemAddFunc.bind(this)}
+						                enterKeyPressed={this._enterKeyPressed.bind(this)}
 						                itemOnChange={this._itemOnChange.bind(this)}
 						                ref={'inputRef'}/>					
 					</div>
