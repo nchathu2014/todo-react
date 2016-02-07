@@ -10,7 +10,7 @@ body{
 .list-item{
 	font-size: 18px;
 	font-weight:bold;
-	border-bottom:1px dotted white;
+	border-bottom:2px solid #1b6d85;
 	padding: 20px;
 	color:#1b6d85;
 	background-color:#adc2eb;
@@ -20,3 +20,13 @@ body{
 	max-height:600px;
 	overflow: auto;
 }
+
+.btnGroup{
+	display:inline;
+}
+
+.editTextBox{
+	border:2px dotted #1b6d85;
+	background-color: #adc2eb
+}
+

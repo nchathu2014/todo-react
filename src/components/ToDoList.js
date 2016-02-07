@@ -46,7 +46,7 @@ export default class ToDoList extends React.Component{
 
 		return(
 			<div className="container">
-				<h2 className='text-center' style={style}>To-Do-List : ReactJS (ES7)</h2>
+				<h2 className='text-center' style={style}>To-Do-List : ReactJS (ES6)</h2>
 				<div className="row">
 					<div className="col-lg-6 col-lg-offset-3">
 						<InputComponent itemInput={this.state.data} 
