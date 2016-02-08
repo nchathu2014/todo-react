@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ToDoList from './components/ToDoList';
+import DataProvider from './components/DataProvider';
 
 ReactDOM.render(
-	<ToDoList/>,
+	<DataProvider/>,
 	document.getElementById('container')
 );
+
+
+/*ReactDOM.render(
+	<ToDoList/>,
+	document.getElementById('container')
+);*/
 
 
 

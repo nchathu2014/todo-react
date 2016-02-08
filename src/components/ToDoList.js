@@ -5,8 +5,8 @@ import ItemList from './ItemList';
 
 export default class ToDoList extends React.Component{
 
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state={
 			data:"",
 			listData:[]
@@ -64,6 +64,12 @@ export default class ToDoList extends React.Component{
 						                ref={'inputRef'}/>					
 					</div>
 					<div className="row">
+
+						{this.props.testList} <br/>
+
+						<button onClick={this.props.addMe}>add me</button>
+						<button onClick={this.props.delMe}>remove me</button>
+
 						<ItemList listData={this.state.listData}/>
 					</div>
 				</div>

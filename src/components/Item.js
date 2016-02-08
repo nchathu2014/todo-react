@@ -85,12 +85,6 @@ console.log("componentDidMount"+this.state.data)
 
 	_renderDisplay(){
 		
-		
-		var List1 = Immutable.List([1])
-		var List2 = List1.push(this.state.data)
-		this.props.data=List2;
-		console.log("Nuwan "+List2)
-		
 		return(
 
 				<div className="list-item">
