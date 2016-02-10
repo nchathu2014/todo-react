@@ -6,27 +6,45 @@ export default class Item extends React.Component{
 		super(props);
 		this.state={
 			editable:false,
-			inputText:this.props.name
+			inputText:this.props.name,
+			visibility:'none'
 		}
 		
 	}
 
-	_editItem(){
-		
+	render(){
+		return (this.state.editable) ? this._renderEditDisplay() : this._renderDisplay()	
+	}
+
+	_editItem(){		
 		this.setState({
 			editable:true
+		})
+	}
+
+	_onMouseOver(){
+		this.setState({
+			visibility:'inline'
+		})
+	}
+
+	_onMouseOut(){
+		this.setState({
+			visibility:'none'
 		})
 	}
 
 	_renderDisplay(){
 
 		return(
-			<div className="list-item">
+			<div className="list-item" 
+			     onMouseOver={this._onMouseOver.bind(this)} 
+				 onMouseOut={this._onMouseOut.bind(this)}>
 				<span>{this.state.inputText}</span>
-				<span className="pull-right">
+				<span className="pull-right btn-group" style={{display:this.state.visibility}} ref="btn-group">
 					<button className="btn"  onClick={this._editItem.bind(this)}>
 						<span className="glyphicon glyphicon-pencil"></span>
-					</button>&nbsp;
+					</button>
 					<button className="btn"  onClick={this.props.removeItem}>
 						<span className="glyphicon glyphicon-remove"></span>
 					</button>
@@ -75,14 +93,6 @@ export default class Item extends React.Component{
 				</button></span>
 			</div>
 		);
-	}
-	render(){
-       if(this.state.editable){
-       		return this._renderEditDisplay();
-       }else{
-       		return this._renderDisplay();
-       }
-		
 	}
 }
 

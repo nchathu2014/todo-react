@@ -7,34 +7,10 @@ export default class ToDoList extends React.Component{
 		super(props);
 		this.state={
 			inputText:""
-			
-
-		}
-		 
-	}
-
-	_onKeyPress(event){
-		
-		if(event.charCode==13){
-			console.log(event.charCode)
-			this.props.toDoList.push(event.target.value);
-			this.forceUpdate();
-			this.refs.inputBox.value=''
-		}
-
-		
-	}
-
-	_onChange(){
-		console.log(this.refs.inputBox.value)
-		this.setState({
-			inputText:this.refs.inputBox.value
-		});
+		}		 
 	}
 
 	render(){
-
-
 		return(
 			<div className="container">
 				<div className="row">
@@ -47,11 +23,28 @@ export default class ToDoList extends React.Component{
 					   			className="form-control cus-input"/>
 					   	
 						<ItemList  toDoList={this.props.toDoList}/>
-
 					</div>
 				</div>
 			</div>
 		);
+	}
+
+	_onKeyPress(event){	
+		if(event.charCode==13){
+			if(event.target.value==''){
+				alert("Enter a To Do")
+			}else{
+				this.props.toDoList.push(event.target.value);
+				this.forceUpdate();
+				this.refs.inputBox.value=''
+			}			
+		}	
+	}
+
+	_onChange(){
+		this.setState({
+			inputText:this.refs.inputBox.value
+		});
 	}
 }
 
