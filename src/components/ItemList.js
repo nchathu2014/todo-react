@@ -1,51 +1,39 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Item from './Item';
 
 export default class ItemList extends React.Component{
 
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
+			
+		
 	}
 
+	_removeItem(index){
+		console.log("_removeItem");
+		this.props.toDoList.splice(index,1);
+		this.forceUpdate();
+	} 
 
 	
-
-	_deleteHandler(index){
-
-	
-	var arr = this.props.listData;   
-		 console.log("PREV : "+arr)    
-		 
-        arr.splice(index, 1);
-
-        console.log("AFTER : "+arr)
-
-        this.forceUpdate();
-	}
-
-
 
 	render(){
-       
-
+	
 		return(
-			<div>
-				<div className="col-lg-6 col-lg-offset-3">
-					<div className="list itemListContainer">
-						{this.props.listData.map((item,index)=>{
-							return <Item  onDeleteItem={this._deleteHandler.bind(this,index)} 
-										  key={index} 
-										  id={index}
-										  data={item}
-										  ref="itemRef"/>
-						})}
-					</div>
-				</div>
+			<div className="itemListContainer">
+			<div className="count-header"><h4>LIST COUNT : [{this.props.toDoList.length}]</h4></div>
+				{this.props.toDoList.map((item,index)=>{
+					return <Item  name={item} 
+							key={Math.random()} 
+							id={index} 
+							removeItem={this._removeItem.bind(this,index)}
+							/>
+				})}
 			</div>
 		);
 	}
 }
+
 
 
 

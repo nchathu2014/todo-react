@@ -35,3 +35,14 @@ body{
     -moz-box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
     box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
 }
+
+.count-header{
+	background: #ff0000;
+	padding: 10px;
+	color:white;
+}
+
+.cus-text{
+	border-radius: none;
+	padding: 10px;
+}

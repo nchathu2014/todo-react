@@ -1,112 +1,92 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Immutable from 'immutable';
 
 export default class Item extends React.Component{
 
 	constructor(props){
 		super(props);
 		this.state={
-			data:this.props.data,
-			isEdit:false
+			editable:false,
+			inputText:this.props.name
 		}
-
-
+		
 	}
 
-	componentDidMount(){
-
+	_editItem(){
+		
 		this.setState({
-			data:this.props.data // this.props.data => this.state.data moving props data to a state
+			editable:true
 		})
-console.log("componentDidMount"+this.state.data)
 	}
 
-	
+	_renderDisplay(){
 
-	render(){
-		return (this.state.isEdit) ? this._renderEditDisplay():this._renderDisplay();		
+		return(
+			<div className="list-item">
+				<span>{this.state.inputText}</span>
+				<span className="pull-right">
+					<button className="btn"  onClick={this._editItem.bind(this)}>
+						<span className="glyphicon glyphicon-pencil"></span>
+					</button>&nbsp;
+					<button className="btn"  onClick={this.props.removeItem}>
+						<span className="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
+		);
 	}
 
-	_onEditItem(){
+	_close(){
 		this.setState({
-			isEdit:true
-		});
-	}
-
-	_onEditItemSave(){
+			editable:false
+		})
 		this.setState({
-			data:ReactDOM.findDOMNode(this.refs.editTextRef).value,
-			isEdit:false
-		});
-
+			inputText:this.props.name
+		})
 	}
 
-	_closeEdit(){
+	_onChange(event){
 		this.setState({
-			isEdit:false
-		});
+			inputText:event.target.value
+		})
 	}
 
-	_onChangeHandle(event){
-
-		console.log(event.target.value);
-		
-		
-		
-
-	}
-
-	componentDidUpdate(){
-		/*console.log(this.refs.labelRef)*/
-		
+	_saveItem(){
+		this.setState({
+			editable:false
+		})
 	}
 
 	_renderEditDisplay(){
 		return(
 			<div className="list-item">
-					<input type="text" ref="editTextRef"
-									   className="form-control editTextBox" 
-							           defaultValue={this.state.data}
-							           onChange={this._onChangeHandle}/>
-
-					<span className="pull-right">
-						<button className="btn" onClick={this._onEditItemSave.bind(this)}>
-							<span className="glyphicon glyphicon-floppy-saved"></span>
-						</button>
-						&nbsp;
-						<button className="btn" onClick={this._closeEdit.bind(this)}>
-							<span className="glyphicon glyphicon-menu-left"></span>
-						</button>
-					</span>
+			
+				<span><input  ref="inputBox" 
+				              type="text"
+				              className="editTextBox"
+				              value={this.state.inputText} 
+							  onChange={this._onChange.bind(this)}
+							  /></span>
+			    <span className="pull-right">				  
+				<button className="btn"  onClick={this._saveItem.bind(this)}>
+					<span className="glyphicon glyphicon-floppy-saved"></span>
+				</button>&nbsp;
+				<button className="btn"  onClick={this._close.bind(this)}>
+					<span className="glyphicon glyphicon-menu-left"></span>
+				</button></span>
 			</div>
 		);
 	}
-
-	_renderDisplay(){
+	render(){
+       if(this.state.editable){
+       		return this._renderEditDisplay();
+       }else{
+       		return this._renderDisplay();
+       }
 		
-		return(
-
-				<div className="list-item">
-
-
-					<span id="labelRef" ref="labelRef">{this.props.data}</span>
-					{this.props.id+1} ---> 
-					<span className="pull-right">
-						<button className="btn" onClick={this._onEditItem.bind(this)}>
-							<span className="glyphicon glyphicon-pencil"></span>
-						</button>
-						&nbsp;
-						<button className="btn" onClick={this.props.onDeleteItem}>
-							<span className="glyphicon glyphicon-remove"></span>
-						</button>
-					</span>
-				</div>
-		);
 	}
 }
 
-Item.propTypes={
-	defaultValue:React.PropTypes.string
-}
+
+
+
 

@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DataProvider from './components/DataProvider';
+import ToDoList from './components/ToDoList';
+
+var LIST = ["Nuwan with ReactJS"]
 
 ReactDOM.render(
-	<DataProvider/>,
+	<ToDoList toDoList={LIST}/>,
 	document.getElementById('container')
 );
 
-
-/*ReactDOM.render(
-	<ToDoList/>,
-	document.getElementById('container')
-);*/
 
 
 

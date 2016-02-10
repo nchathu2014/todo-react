@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import InputComponent from './InputComponent';
 import ItemList from './ItemList';
 
 export default class ToDoList extends React.Component{
@@ -8,69 +6,48 @@ export default class ToDoList extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			data:"",
-			listData:[]
+			inputText:""
+			
+
 		}
+		 
 	}
 
-	_itemAddFunc(event){
-		
-
-		if(this.state.data.trim()==""){
-			alert("Enter a topic");
-		}else{
-			var node = ReactDOM.findDOMNode(this.refs.inputRef.refs.inputBox);		
-			this.setState({
-				listData:this.state.listData.concat(this.state.data)
-			});
-			if(node.value){
-				this.setState({
-					data:""
-				})
-				node.focus();
-			}
-		}	
-	}
-
-	_itemOnChange(event){
-		this.setState({
-			data:event.target.value
-		});	
-	}
-
-	_enterKeyPressed(event){
+	_onKeyPress(event){
 		
 		if(event.charCode==13){
-			
-			this._itemAddFunc()
+			console.log(event.charCode)
+			this.props.toDoList.push(event.target.value);
+			this.forceUpdate();
+			this.refs.inputBox.value=''
 		}
+
+		
+	}
+
+	_onChange(){
+		console.log(this.refs.inputBox.value)
+		this.setState({
+			inputText:this.refs.inputBox.value
+		});
 	}
 
 	render(){
 
-		var style={
-			'color':'#ffffff'
-		}
 
 		return(
 			<div className="container">
-				<h2 className='text-center' style={style}>To-Do-List : ReactJS (ES6)</h2>
 				<div className="row">
 					<div className="col-lg-6 col-lg-offset-3">
-						<InputComponent itemInput={this.state.data} 
-						                itemAddFunc={this._itemAddFunc.bind(this)}
-						                enterKeyPressed={this._enterKeyPressed.bind(this)}
-						                itemOnChange={this._itemOnChange.bind(this)}
-						                ref={'inputRef'}/>					
-					</div>
-					<div className="row">
+						<h3 className="text-center" style={{color:'white'}}>To-Do-List : ReactJS (with ES6 Standard)</h3>
+						<input  type="text" 
+					   			onKeyPress={this._onKeyPress.bind(this)} 
+					   			onChange={this._onChange.bind(this)}
+					   			ref="inputBox"
+					   			className="form-control cus-input"/>
+					   	
+						<ItemList  toDoList={this.props.toDoList}/>
 
-						{this.props.testList} <br/>
-
-						<button onClick={this.props.addMe}>add me</button>
-						<button onClick={this.props.delMe}>remove me</button>
-
-						<ItemList listData={this.state.listData}/>
 					</div>
 				</div>
 			</div>
@@ -78,15 +55,5 @@ export default class ToDoList extends React.Component{
 	}
 }
 
-ToDoList.propTypes={
-	itemInput:React.PropTypes.string,
-	itemAddFunc:React.PropTypes.func,
-	itemOnChange:React.PropTypes.func,
-	listData:React.PropTypes.func
-}
-
-ToDoList.defaultProps={
-	itemInput:""
-}
 
 
