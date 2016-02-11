@@ -13,3 +13,6 @@ if you are having trouble with these follow the links to chekouts
 # Run
 - npm install
 - npm start
+
+# Test
+http://localhost:7000
